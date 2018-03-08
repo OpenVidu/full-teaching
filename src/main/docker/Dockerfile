@@ -11,7 +11,7 @@ RUN chmod +x /wait.sh
 RUN apt-get update
 RUN apt-get install netcat-openbsd
 
-ADD full-teaching-0.5-SNAPSHOT.war app.jar
+ADD full-teaching-1.0.0.war app.jar
 RUN bash -c 'touch /app.jar'
 
 EXPOSE 5000
