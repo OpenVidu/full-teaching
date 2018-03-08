@@ -1,0 +1,38 @@
+<div class="navbar-fixed">
+  <nav id="navigation-bar" class="secondaryColor-back" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="/" class="brand-logo app-title-header white-text">FullTeaching</a>
+
+      <!--Logout view-->
+      <ul *ngIf="!this.authenticationService.isLoggedIn()" class="right hide-on-med-and-down">
+        <li><a href="#login-modal" (click)="updateLoginModalView(false)" id="signUpButton" class="navbar-button waves-effect white-text">Sign up</a></li>
+        <li><a href="#login-modal" (click)="updateLoginModalView(true)" class="navbar-button waves-effect white-text">Log in</a></li>
+      </ul>
+
+      <!--Login view-->
+      <ul *ngIf="this.authenticationService.isLoggedIn()" class="right hide-on-med-and-down">
+        <li><a id="courses-button" routerLink="/courses" class="navbar-button waves-effect white-text">Courses</a></li>
+        <li><a id="settings-button" routerLink="/settings" class="navbar-button waves-effect white-text">Settings</a></li>
+        <!-- Dropdown Content -->
+        <ul id="dropdown1" class="dropdown-content">
+          <li class="divider"></li>
+          <li class="dropdown-menu-button"><a id="logout-button" class="waves-effect" (click)="logout()">Logout</a></li>
+          <li class="divider"></li>
+          <li class="dropdown-menu-button"><a id="contact-button" class="waves-effect">Contact</a></li>
+        </ul>
+        <!-- Dropdown Trigger -->
+        <li><a class="navbar-button"><i id="arrow-drop-down" class="material-icons white-text right dropdown-button" data-activates="dropdown1" data-beloworigin="true" materialize="dropdown" >arrow_drop_down</i></a></li>
+      </ul>
+
+      <!--Side nav mobile-->
+      <ul *ngIf="this.authenticationService.isLoggedIn()" id="nav-mobile" class="side-nav">
+        <li><a routerLink="/courses" class="waves-effect">Courses</a></li>
+        <li><a routerLink="/settings" class="waves-effect">Settings</a></li>
+        <li class="divider"></li>
+        <li><a class="waves-effect">Contact</a></li>
+        <li><a class="waves-effect" (click)="logout()">Logout</a></li>
+      </ul>
+      <a *ngIf="this.authenticationService.isLoggedIn()" class="button-collapse" materialize="sideNav" data-activates="nav-mobile" [materializeParams]="[{closeOnClick: true}, {draggable: true}]"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+</div>

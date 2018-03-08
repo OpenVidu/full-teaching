@@ -1,0 +1,52 @@
+.comment-div {
+  padding-left: 20px;
+}
+
+.row-margin-bottom {
+  margin-bottom: 10px;
+}
+
+.user-name {
+  display: inline-block;
+  font-size: small;
+  font-weight: 300;
+}
+
+.message {
+  display: inline-block;
+}
+
+.message-itself {
+  word-wrap: break-word;
+}
+
+.video-itself {
+  width: fit-content;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.video-itself video {
+  width: 500px;
+}
+
+.replay-icon {
+  font-size: 20px;
+  color: rgba(94, 97, 95, 0.51);
+  cursor: pointer;
+}
+
+.replay-icon:hover {
+  color: #91a59b;
+}
+
+.user-date-separator {
+  display: inline-block;
+  padding-right: 10px;
+  padding-left: 10px;
+}

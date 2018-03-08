@@ -1,0 +1,27 @@
+<div class="comment-div">
+  <div class="row row-margin-bottom">
+    <div class="col l11 m11 s11" [class.teacher-forum]="isCommentTeacher(this.comment)">
+      <div *ngIf="!!comment.message" class="message-itself">{{comment.message}}</div>
+      <div *ngIf="!!comment.videourl" class="video-itself">
+        <video [attr.id]="comment.videourl" [src]="comment.videourl" (mouseenter)="onHovering($event)" (mouseleave)="onUnhovering($event)"
+          [attr.poster]="comment.audioonly ? 'assets/images/volume.png' : ''" [style.background-color]="comment.audioonly ? 'rgb(77,77,77)' : ''"
+          [style.max-height]="comment.audioonly ? '375px' : ''"></video>
+      </div>
+      <div class="user-name forum-comment-author" [class.teacher-name]="isCommentTeacher(comment)">{{comment.user.nickName}}</div>
+      <div class="user-date-separator">-</div>
+      <div class="user-name">{{comment.date | date}} - {{comment.date | date:'H:mm' }}</div>
+    </div>
+    <div class="col l1 m1 s1 no-padding-left right-align">
+      <a href="#course-details-modal" [title]="'Send replay'" (click)="updatePostModalMode(1, 'New replay', null, this.comment, null); this.animationService.animateIfSmall()">
+        <i class="material-icons replay-icon">feedback</i>
+      </a>
+      <a href="#course-details-modal" [title]="'Send video replay'" (click)="updatePostModalMode(6, 'New video replay', null, this.comment, null); this.animationService.animateIfSmall()">
+        <i class="material-icons replay-icon">videocam</i>
+      </a>
+    </div>
+  </div>
+
+  <div *ngFor="let replay of comment.replies; let i = index">
+    <app-comment [comment]="replay"></app-comment>
+  </div>
+</div>

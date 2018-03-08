@@ -1,0 +1,27 @@
+.card-panel {
+  box-shadow: none !important;
+  text-align: initial;
+}
+
+.fail {
+  background-color: rgba(167, 56, 65, 0.2);
+  color: #a73841;
+}
+
+.warning {
+  background-color: rgba(175, 110, 0, 0.2);
+  color: #af6e00;
+}
+
+.card-panel.warning {
+  margin-bottom: 0.5rem;
+}
+
+.correct {
+  background-color: rgba(55, 86, 70, 0.25);
+  color: #375546;
+}
+
+i {
+  cursor: pointer;
+}

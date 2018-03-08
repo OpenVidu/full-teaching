@@ -1,0 +1,169 @@
+<div class="container margins-top-bottom">
+
+  <!--CHANGE PASSWORD DIALOG-->
+  <div id="password-modal" class="modal my-modal-class course-modal" materialize="modal" [materializeParams]="[{dismissible: false}]">
+
+    <div *ngIf="processingPass" class="loading"></div>
+
+    <div class="modal-content" [class.filtered]="processingPass">
+      <p class="p-bold-modal-header">Change password</p>
+      <div class="row no-margin">
+
+        <form materialize #passwordForm class="col s12" (ngSubmit)="onPasswordSubmit()">
+          <div class="row no-margin">
+
+            <div class="row row-mobile">
+              <div class="input-field col s12">
+                <input [(ngModel)]="inputCurrentPassword" name="inputCurrentPassword" id="inputCurrentPassword" type="password" class="validate" required>
+                <label for="inputCurrentPassword">Current password</label>
+              </div>
+            </div>
+
+            <div class="row row-mobile">
+              <div class="input-field col s12">
+                <input [(ngModel)]="inputNewPassword" name="inputNewPassword" id="inputNewPassword" type="password" class="validate" required>
+                <label for="inputNewPassword">New password</label>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-field col s12">
+                <input [(ngModel)]="inputNewPassword2" name="inputNewPassword2" id="inputNewPassword2" type="password" class="validate" required>
+                <label for="inputNewPassword2">Repeat new password</label>
+              </div>
+            </div>
+
+          </div>
+
+          <app-error-message *ngIf="fieldsIncorrect" (eventShowable)="fieldsIncorrect = false" [errorTitle]="this.errorTitle" [errorContent]="this.errorContent" [customClass]="this.customClass" [closable]="true"></app-error-message>
+
+          <div class="row row-mobile right-align">
+            <a (click)="passwordForm.reset(); this.fieldsIncorrect = false;" class="modal-action modal-close waves-effect btn-flat modal-footer-button cancel-modal-btn">Close</a>
+            <button type="submit" class="waves-effect btn-flat modal-footer-button">Send</button>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+  <!--CHANGE PASSWORD DIALOG-->
+
+  <div class="setting-section">PROFILE
+    <div class="row divider"></div>
+  </div>
+
+  <div class="row profile-row">
+
+    <div class="col l4 m6 s12">
+
+      <div *ngIf="processingPic" class="loading loading-pic"></div>
+
+      <div class="row no-margin" [class.filtered]="processingPic">
+        <div class="col s12">
+          <img *ngIf="!!this.user" class="circle profile-pic" src="{{this.user.picture}}">
+        </div>
+        <div class="col s12">
+          <div class="row">
+
+            <app-file-uploader *ngIf="!!this.user" (onCompleteFileUpload)="pictureUploadCompleted($event)" (onUploadStarted)="pictureUploadStarted($event)" [uniqueID]="0" [URLUPLOAD]="this.URL_UPLOAD + this.user.id" [isMultiple]="false" [typeOfFile]="'picture'" [buttonText]="'Change picture'"></app-file-uploader>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col l8 m6 s12">
+      <ul class="collection">
+        <li class="collection-item setting-li">
+          <div class="setting-title">Mail</div>
+          <div *ngIf="!!this.user" id="stng-user-mail" class="setting-content right">{{this.user.name}}</div>
+        </li>
+        <li class="collection-item setting-li">
+          <div class="setting-title">Name</div>
+          <div *ngIf="!!this.user" class="setting-content right">{{this.user.nickName}}</div>
+        </li>
+        <li class="collection-item setting-li">
+          <div class="setting-title">Registration date</div>
+          <div *ngIf="!!this.user" class="setting-content right">{{this.user.registrationDate | date}}</div>
+        </li>
+        <li class="collection-item setting-li">
+          <div class="setting-title">Password</div>
+          <div class="setting-content right">
+            <a href="#password-modal" class="btn waves-effect button-small" (click)="this.animationService.animateIfSmall()">Change password</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="setting-section">DEFAULT SETTINGS
+    <div class="row divider"></div>
+  </div>
+
+  <div class="row">
+
+    <div class="col l4 m6 s12">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title grey-text text-darken-4">Setting 1</span>
+          <p>About this particular setting</p>
+          <div class="switch">
+            <label>Off<input type="checkbox"><span class="lever"></span> On</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col l4 m6 s12">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title grey-text text-darken-4">Setting 2</span>
+          <p>About this particular setting</p>
+          <div class="switch">
+            <label>Off<input type="checkbox"><span class="lever"></span> On</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col l4 m6 s12">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title grey-text text-darken-4">Setting 3</span>
+          <p>About this particular setting</p>
+          <div class="switch">
+            <label>Off<input type="checkbox"><span class="lever"></span> On</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col l4 m6 s12">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title grey-text text-darken-4">Setting 4</span>
+          <p>About this particular setting</p>
+          <div class="switch">
+            <label>Off<input type="checkbox"><span class="lever"></span> On</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col l4 m6 s12">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title grey-text text-darken-4">Setting 5</span>
+          <p>About this particular setting</p>
+          <div class="switch">
+            <label>Off<input type="checkbox"><span class="lever"></span> On</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

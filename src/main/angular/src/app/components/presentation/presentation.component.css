@@ -1,0 +1,107 @@
+nav ul a, nav .brand-logo {
+  color: #444;
+}
+
+p {
+  line-height: 2rem;
+}
+
+.parallax-container {
+  min-height: 380px;
+  line-height: 0;
+  height: auto;
+  color: rgba(255, 255, 255, .9);
+}
+
+.parallax-container .section {
+  width: 100%;
+}
+
+@media only screen and (min-width: 993px) {
+  .parallax-container .section {
+    position: absolute;
+    top: 20%;
+  }
+  #index-banner .section {
+    top: 20%;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .parallax-container .section {
+    position: absolute;
+  }
+  #index-banner .section {
+    top: 20%;
+  }
+}
+
+/*Mobile phones*/
+@media only screen and (max-width: 600px) and (orientation: portrait), screen and (max-width: 992px) and (orientation: landscape) {
+  img.welcome-image {
+    bottom: -180px !important;
+    left: -325px !important;
+    /*CSS transitions*/
+    -o-transition-property: none !important;
+    -moz-transition-property: none !important;
+    -ms-transition-property: none !important;
+    -webkit-transition-property: none !important;
+    transition-property: none !important;
+    /*CSS transforms*/
+    -o-transform: none !important;
+    -moz-transform: none !important;
+    -ms-transform: none !important;
+    -webkit-transform: none !important;
+    transform: none !important;
+    /*CSS animations*/
+    -webkit-animation: none !important;
+    -moz-animation: none !important;
+    -o-animation: none !important;
+    -ms-animation: none !important;
+    animation: none !important;
+  }
+
+  ul.slides li {
+    /*CSS transitions*/
+    -o-transition-property: none !important;
+    -moz-transition-property: none !important;
+    -ms-transition-property: none !important;
+    -webkit-transition-property: none !important;
+    transition-property: none !important;
+    /*CSS transforms*/
+    -o-transform: none !important;
+    -moz-transform: none !important;
+    -ms-transform: none !important;
+    -webkit-transform: none !important;
+    transform: none !important;
+    /*CSS animations*/
+    -webkit-animation: none !important;
+    -moz-animation: none !important;
+    -o-animation: none !important;
+    -ms-animation: none !important;
+    animation: none !important;
+  }
+}
+/*End Mobile phones*/
+
+.fixed-navbar-gap {
+  top: -64px;
+  min-height: 444px;
+}
+
+.welcome-image {
+  -webkit-filter: grayscale(0.25);
+  filter: grayscale(0.25);
+}
+
+.slider-images {
+  -webkit-filter: grayscale(1);
+  filter: grayscale(1);
+}
+.slider .slides li .caption {
+  color: #375646 !important;
+}
+
+.indicator-item.active {
+  background-color: #375646 !important;
+}

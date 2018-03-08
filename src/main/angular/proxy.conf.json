@@ -1,0 +1,8 @@
+{
+  "/**": {
+    "target": "https://localhost:5000",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

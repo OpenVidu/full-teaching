@@ -1,0 +1,80 @@
+.outer-message {
+  display: block;
+}
+
+.system-msg {
+  color: #BDBDBD;
+  font-style: italic;
+  margin-top: 5px;
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+.own-msg {
+  text-align: right;
+}
+
+.own-msg .message-content {
+  background-color: rgba(142, 195, 168, 0.46);
+  margin-left: 15px;
+  text-align: left;
+  display: inline-block;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  padding-top: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  line-height: 1.3;
+}
+
+.own-msg .message-header {
+  display: block;
+  margin-top: 7px;
+}
+
+.own-msg .message-header img {
+  width: 2.7em;
+  margin-bottom: -6px;
+  background-color: #c5ddd1;
+  border-bottom-right-radius: 0% !important;
+}
+
+.stranger-msg {
+  text-align: left;
+}
+
+.stranger-msg .message-content {
+  background-color: #d0d0d0;
+  margin-right: 15px;
+  text-align: left;
+  display: inline-block;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  padding-top: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  line-height: 1.3;
+}
+
+.stranger-msg .message-header {
+  display: block;
+  margin-top: 7px;
+}
+
+.stranger-msg .message-header img {
+  width: 2.7em;
+  margin-bottom: -6px;
+  background-color: #d0d0d0;
+  border-bottom-left-radius: 0% !important;
+}
+
+.user-name {
+  font-size: small;
+  font-weight: 600;
+}
+
+.user-message {
+  font-size: small;
+}

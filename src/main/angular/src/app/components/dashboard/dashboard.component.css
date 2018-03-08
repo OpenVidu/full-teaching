@@ -1,0 +1,99 @@
+.anchor-routing {
+  color: inherit !important;
+}
+
+li:hover {
+  background-color: rgba(224, 224, 224, 0.2);
+  transition: all .2s ease-out;
+}
+
+.dashboard-title {
+  font-size: 1.5rem;
+  font-weight: 300;
+  padding-bottom: 15px;
+}
+
+.course-title {
+  cursor: pointer;
+}
+
+span.title {
+  font-weight: bold;
+}
+
+.session-list-item {
+  margin-top: 15px;
+  margin-bottom: 0;
+}
+
+li.collection-item {
+  position: relative;
+}
+
+.loading-details {
+  animation: spinIcon 0.7s infinite linear;
+}
+
+.sessionImage {
+  display: inline;
+}
+
+li.li-warning {
+  padding-left: 7.5px;
+  padding-right: 7.5px;
+}
+
+.course-put-icon {
+  font-size: 20px;
+  color: #5e615f;
+  cursor: pointer;
+}
+
+.course-put-icon:hover {
+  color: #91a59b;
+}
+
+@media only screen and (min-width: 993px) {
+  .sessionImage {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .sessionImage {
+    width: 45px;
+    height: 45px;
+  }
+}
+
+@media only screen and (min-width: 601px) {
+  .calendar-div {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+}
+
+/*Mobile phones*/
+@media only screen and (max-width: 600px) and (orientation: portrait), screen and (max-width: 992px) and (orientation: landscape) {
+  .container-ul {
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .dashboard-title{
+    text-align: center;
+  }
+  .calendar-div{
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-bottom: 35px;
+  }
+  .dashboard-col{
+    margin-top: 30px;
+  }
+}

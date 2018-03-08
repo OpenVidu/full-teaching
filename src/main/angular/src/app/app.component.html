@@ -1,0 +1,15 @@
+<div id="sticky-footer-div">
+
+  <header *ngIf="!isVideoSessionUrl()">
+    <navbar></navbar>
+  </header>
+
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+
+  <footer *ngIf="!isVideoSessionUrl()" class="page-footer secondaryColor-back">
+    <app-footer></app-footer>
+  </footer>
+
+</div>

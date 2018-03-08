@@ -1,0 +1,9 @@
+/target/
+/src/main/resources/amazon.properties
+/bin/
+/files/
+/pictures/
+/assets/
+.settings
+.project
+.classpath

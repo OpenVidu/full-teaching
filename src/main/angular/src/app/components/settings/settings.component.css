@@ -1,0 +1,36 @@
+.profile-pic {
+  width: 100%;
+}
+
+.setting-title {
+  display: inline-block;
+  font-size: large;
+  font-variant: small-caps;
+  font-weight: 500;
+}
+
+.setting-content {
+  display: inline-block;
+}
+
+.setting-li {
+  padding: 15px 20px !important;
+}
+
+.setting-section {
+  font-size: 1.5rem;
+  font-weight: 300;
+  padding-bottom: 15px;
+}
+
+.profile-row {
+  margin-bottom: 30px;
+}
+
+#input-file {
+  display: none;
+}
+
+div.loading.loading-pic{
+  position: relative !important;
+}

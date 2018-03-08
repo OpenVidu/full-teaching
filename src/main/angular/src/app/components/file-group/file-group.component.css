@@ -1,0 +1,122 @@
+.file-group-root {
+  padding-left: 15px;
+  margin-bottom: 30px;
+}
+
+.file-group-child {
+  padding-left: 30px !important;
+  margin-bottom: 20px !important;
+}
+
+.file-group-title h5 {
+  font-size: 1.1rem;
+  font-weight: 300;
+}
+
+.file-group-title-div {
+  padding-left: 0.656em;
+  margin-top: 20px;
+}
+
+.buttons-container-div {
+  padding-bottom: 0.656rem;
+  margin-bottom: 0.656em;
+}
+
+.mode-edit-icon {
+  max-height: 24px;
+  margin-left: 10px;
+}
+
+.chip-file {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  min-width: 300px;
+  cursor: pointer;
+  padding-left: 0;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.file-extension {
+  background-color: #FFFFFF;
+  border-radius: 15px;
+  padding: 1px 3px 1px 3px;
+  margin-right: 2px;
+  font-size: 13px;
+  border: 3px solid #e0e0e0;
+  height: 32px;
+  line-height: 23px;
+  min-width: 32px;
+  text-align: center;
+}
+
+h5 {
+  display: inline-block;
+}
+
+.disp-inline-flex {
+  display: inline-flex;
+}
+
+.file-controls {
+  display: inline-block;
+}
+
+.button-add-file {
+  margin-left: 5px;
+  margin-right: 2.5px;
+  border: 1px solid #e4e4e4;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: x-small;
+  font-weight: 500;
+}
+
+.action-file-icon {
+  cursor: pointer;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.action-file-icon:hover {
+  color: #91a59b;
+}
+
+.drag-bag-editable {
+  min-height: 35px;
+}
+
+.drag-handle {
+  cursor: move;
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+}
+
+.title-edit {
+  background-color: rgb(243, 243, 243);
+}
+
+/*Mobile phones*/
+@media only screen and (max-width: 600px) and (orientation: portrait), screen and (max-width: 992px) and (orientation: landscape) {
+  .chip-file {
+    min-width: 230px !important;
+    margin-bottom: 0px !important;
+    margin-top: 5px !important;
+  }
+  .file-controls {
+    display: block !important;
+  }
+}
+/*End mobile phones*/

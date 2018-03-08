@@ -1,0 +1,78 @@
+/*Mobile phones*/
+@media only screen and (max-width: 600px) and (orientation: portrait), screen and (max-width: 992px) and (orientation: landscape) {
+  #navigation-bar {
+    position: absolute !important; /*Navbar will be fixed at top of the page in small devices*/
+  }
+}
+/*End mobile phones*/
+
+/*Till tablets*/
+@media only screen and (max-width: 992px) {
+  .add-session-small {
+    display: block !important;
+    float: right !important;
+  }
+}
+
+
+.add-session-small {
+  display: none;
+}
+
+#addSessionButton {
+  padding-right: 5px !important;
+}
+
+#navigation-bar {
+  top: 0;
+  transition: top 0.15s ease-in-out;
+}
+
+.nav-up {
+  top: -64px !important;
+}
+
+a {
+  color: #333;
+}
+
+a.button-collapse {
+  color: #FFFFFF;
+}
+
+ul li {
+  text-transform: uppercase;
+}
+
+.navbar-button {
+  padding-left: 20px;
+  padding-right: 20px;
+  vertical-align: inherit;
+}
+
+.navbar-button:hover {
+  background-color: #375646;
+  color: #61ffae !important;
+}
+
+.dropdown-menu-button a {
+  background-color: #375646;
+  color: white;
+}
+
+.dropdown-menu-button a:hover{
+  background-color: #375646 !important;
+  color: #61ffae;
+}
+
+.dropdown-content li.divider {
+  background-color: #96a19b !important;
+}
+
+#arrow-drop-down:hover {
+  color: #61ffae !important;
+}
+
+i.material-icons {
+    transition: all .2s ease-out;
+}

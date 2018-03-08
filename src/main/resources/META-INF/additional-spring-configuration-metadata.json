@@ -1,0 +1,37 @@
+{"properties": [
+  {
+    "name": "aws.access.key.id",
+    "type": "java.lang.String",
+    "description": "A description for 'aws.access.key.id'"
+  },
+  {
+    "name": "aws.secret.access.key",
+    "type": "java.lang.String",
+    "description": "A description for 'aws.secret.access.key'"
+  },
+  {
+    "name": "aws.namecard.bucket",
+    "type": "java.lang.String",
+    "description": "A description for 'aws.namecard.bucket'"
+  },
+  {
+    "name": "recaptcha.private.key",
+    "type": "java.lang.String",
+    "description": "A description for 'recaptcha.private.key'"
+  },
+  {
+    "name": "profile.stage",
+    "type": "java.lang.String",
+    "description": "A description for 'profile.stage'"
+  },
+  {
+    "name": "openvidu.url",
+    "type": "java.lang.String",
+    "description": "A description for 'openvidu.url'"
+  },
+  {
+    "name": "openvidu.secret",
+    "type": "java.lang.String",
+    "description": "A description for 'openvidu.secret'"
+  }
+]}
