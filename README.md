@@ -140,4 +140,4 @@ Go to `http://localhost:5000/` and there you have it!
 
 FullTeaching has been supported under project LERNIM (RTC-2016-4674-7) confunded by the Ministry of Economy, Finance and Competitiveness of Spain, as well as by the European Union FEDER, whose main goal with this funds is to promote technological development, innovation and high-quality research.
 
-<p align="center"><img src="https://github.com/OpenVidu/full-teaching/blob/master/ReadmeImages/footer-ministerio-economia-400-optimized.png?raw=true"/><img src="https://github.com/pabloFuente/OpenVidu/blob/master/ReadmeImages/footer-european-union-400-optimized.png?raw=true"/></p>
+<p align="center"><img src="https://github.com/OpenVidu/full-teaching/blob/master/ReadmeImages/footer-ministerio-economia-400-optimized.png?raw=true"/><img src="https://github.com/OpenVidu/full-teaching/blob/master/ReadmeImages/footer-european-union-400-optimized.png?raw=true"/></p>
