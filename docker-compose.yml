@@ -11,9 +11,9 @@ services:
      - MYSQL_PASSWORD=pass
 
  full-teaching-openvidu-server-kms:
-   image: openvidu/openvidu-server-kms:1.7.0
+   image: openvidu/openvidu-server-kms:2.0.0
    ports:
-     - 8443:8443
+     - 4443:4443
    environment:
      - KMS_STUN_IP=stun.l.google.com
      - KMS_STUN_PORT=19302
@@ -36,5 +36,5 @@ services:
      - MYSQL_ENV_MYSQL_USER=ft-root
      - MYSQL_ENV_MYSQL_PASSWORD=pass
      - server.port=5000
-     - openvidu.url=https://full-teaching-openvidu-server-kms:8443
+     - openvidu.url=https://full-teaching-openvidu-server-kms:4443
      - openvidu.secret=MY_SECRET

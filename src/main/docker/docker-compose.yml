@@ -13,9 +13,9 @@ services:
 
   full-teaching-openvidu-server-kms:
     container_name: docker-compose-full-teaching-openvidu-server-kms
-    image: openvidu/openvidu-server-kms
+    image: openvidu/openvidu-server-kms:2.0.0
     ports:
-      - 8443:8443
+      - 4443:4443
     environment:
       - KMS_STUN_IP=193.147.51.12
       - KMS_STUN_PORT=3478
