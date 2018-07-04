@@ -27,6 +27,7 @@ public class UserRestTest {
     static String login_uri = "/api-logIn";
     // userStrings
     static String ok_parameters = "[\"unique@gmail.com\", \"Mock66666\", \"fakeUser\", \"IGNORE\"]";
+    static String ok_parameters_2 = "[\"unique2@gmail.com\", \"Mock66666\", \"fakeUser\", \"IGNORE\"]";
     // passParameters
     static String pass_parameters = "[\"Mock66666\", \"Mock77777\"]";
 
@@ -54,7 +55,7 @@ public class UserRestTest {
     public void testCreateUserOk() {
         try {
             // Create the user if it doesn't exist
-            int status = createUser();
+            int status = createUser(ok_parameters);
 
             int expected = HttpStatus.CREATED.value();
 
@@ -71,11 +72,11 @@ public class UserRestTest {
     public void testChangeUserPassword() {
         try {
             // Create the user if it doesn't exist
-            createUser();
+            createUser(ok_parameters_2);
 
             // Change the user's password
             httpApiClient = new HttpApiClient(null, ET_SUT_HOST, ET_SUT_PORT,
-                    change_password_uri, "unique@gmail.com", "Mock66666");
+                    change_password_uri, "unique2@gmail.com", "Mock66666");
 
             int status_pass = httpApiClient.sendRequest(pass_parameters, "put");
             Assert.assertTrue("failure login - expected HTTP status "
@@ -89,12 +90,12 @@ public class UserRestTest {
         }
     }
 
-    private int createUser() throws KeyManagementException,
+    private int createUser(String parameters) throws KeyManagementException,
             NoSuchAlgorithmException, KeyStoreException, IOException {
         httpApiClient = new HttpApiClient(null, ET_SUT_HOST, ET_SUT_PORT,
                 new_user_uri, null, null);
 
-        return httpApiClient.sendRequest(ok_parameters, "post");
+        return httpApiClient.sendRequest(parameters, "post");
     }
 
 }
