@@ -107,17 +107,17 @@ To get a full development version of the app just execute the following commands
 
   First of all, it is necessary to create a schema for MySQL:
 
-        mysql -u root -p
-        CREATE DATABASE full_teaching;
-        exit
+    mysql -u root -p
+    CREATE DATABASE full_teaching;
+    exit
 
   Then we can build and run the project:
 
-        git clone https://github.com/OpenVidu/full-teaching.git
-        cd full-teaching/src/main/angular
-        npm install
-        cd ../../../
-        ./BuildFrontWarAndRun.sh
+    git clone https://github.com/OpenVidu/full-teaching.git
+    cd full-teaching/src/main/angular
+    npm install
+    cd ../../../
+    ./BuildFrontWarAndRun.sh
 
 This clones the project in your working directory, installs dependencies with `npm install` and executes the `BuildFrontJarAndRun.sh` script.
 
