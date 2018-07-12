@@ -3,11 +3,9 @@ version: '3'
 services:
 
  full-teaching-mysql:
-   image: mysql:latest
+   image: mysql:5.7.22
    ports:
-     - 3366:3306
+     - 3336:3306
    environment:
      - MYSQL_ROOT_PASSWORD=pass
      - MYSQL_DATABASE=full_teaching
-     - MYSQL_USER=ft-root
-     - MYSQL_PASSWORD=pass
