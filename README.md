@@ -10,7 +10,7 @@ FullTeaching is an educational web application to make online classes easy for t
 
 - Teachers can create all the **courses** they want and easily invite their students. Every user will see their courses and sessions well ordered on their dashboards.
 
-- Teachers can stablish an unlimited number of **classes** for each course, indicating the content and date for each one of them.
+- Teachers can establish an unlimited number of **classes** for each course, indicating the content and date for each one of them.
 
 - A **calendar** view is provided in order to check all your classes at a glance.
 
@@ -61,63 +61,63 @@ To get a full development version of the app just execute the following commands
 
     *Check version*:
 
-        $ java -version
+        java -version
 
      *Install*:
 
-        $ sudo apt-get install -y default-jdk
+        sudo apt-get install -y default-jdk
 
   - **AngularCLI** ( which requires  Node.js > 4.x.x  and  npm > 3.x.x )
 
     *Check versions*:
 
-        $ node -v
-        $ npm -v
-        $ ng -v
+        node -v
+        npm -v
+        ng -v
 
      *Install*:
 
-        $ sudo apt-get install nodejs
-        $ sudo apt-get install npm
-        $ npm install -g @angular/cli
+        sudo apt-get install nodejs
+        sudo apt-get install npm
+        npm install -g @angular/cli
 
   - **Maven**
 
     *Check version*:
 
-        $ mvn -v
+        mvn -v
 
     *Install*:
 
-        $ sudo apt-get install maven
+        sudo apt-get install maven
 
   - **MySQL**
 
     *Check version*:
 
-        $ mysql --version
+        mysql --version
 
     *Install*:
 
-        $ sudo apt-get update
-        $ sudo apt-get install mysql-server
-        $ sudo mysql_secure_installation
+        sudo apt-get update
+        sudo apt-get install mysql-server
+        sudo mysql_secure_installation
 
 ### Installation and execution
 
   First of all, it is necessary to create a schema for MySQL:
 
-        $ mysql -u root -p
-        $ CREATE DATABASE full_teaching;
-        $ exit
+        mysql -u root -p
+        CREATE DATABASE full_teaching;
+        exit
 
   Then we can build and run the project:
 
-        $ git clone https://github.com/OpenVidu/full-teaching-experiment.git
-        $ cd full-teaching-experiment/src/main/angular
-        $ npm install
-        $ cd ../../../
-        $ ./BuildFrontWarAndRun.sh
+        git clone https://github.com/OpenVidu/full-teaching.git
+        cd full-teaching/src/main/angular
+        npm install
+        cd ../../../
+        ./BuildFrontWarAndRun.sh
 
 This clones the project in your working directory, installs dependencies with `npm install` and executes the `BuildFrontJarAndRun.sh` script.
 
