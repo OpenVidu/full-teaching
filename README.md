@@ -42,7 +42,7 @@ FullTeaching is an educational web application to make online classes easy for t
 
 ## How to execute a demo FullTeaching service (Docker)
 
-To get FullTeaching working in the easiest way, you just have to download the file above `docker-compose.yml` and run `docker-compose up` in its directory. This will pull all the necessary images from DockerHub and will execute everything (it will take one minute after the pull ends). Go to `http://localhost:5000/` and there you have it!
+To get FullTeaching working in the easiest way, you just have to download the file above `docker-compose.yml` and run `docker-compose up` in its directory. This will pull all the necessary images from DockerHub and will execute everything (it will take one minute after the pull ends). Go to `http://localhost:5001/` and there you have it!
 
 You will need some user data to test the features. These are the default users for the demo:
 - Email: `teacher@gmail.com`   Pass: `pass`  (Teacher account)
