@@ -49,6 +49,8 @@ You will need some user data to test the features. These are the default users f
 - Email: `student1@gmail.com`  Pass: `pass`  (Student account) 
 - Email: `student2@gmail.com`  Pass: `pass`  (Student account)
 
+When entering a video lesson, you might have a certificate error when connecting to OpenVidu Server. You must navigate to the URL of OpenVidu Server and accept it (port `4443`, host the docker IP for the container `openvidu/openvidu-server-kms:2.3.0`, probably something like 172.17.0.X)
+
 
 ## How to develop FullTeaching
 
