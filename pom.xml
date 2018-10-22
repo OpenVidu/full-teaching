@@ -143,13 +143,13 @@
 		<dependency>
 			<groupId>org.apache.tika</groupId>
 			<artifactId>tika-core</artifactId>
-			<version>1.14</version>
+			<version>1.19.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.tika</groupId>
 			<artifactId>tika-parsers</artifactId>
-			<version>1.14</version>
+			<version>1.19.1</version>
 		</dependency>
 		<!-- Read files -->
 
