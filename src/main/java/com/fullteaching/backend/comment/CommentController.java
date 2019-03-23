@@ -1,5 +1,7 @@
 package com.fullteaching.backend.comment;
 
+import com.fullteaching.backend.coursedetails.CourseDetailsService;
+import com.fullteaching.backend.entry.EntryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fullteaching.backend.entry.Entry;
-import com.fullteaching.backend.entry.EntryRepository;
 import com.fullteaching.backend.entry.NewEntryCommentResponse;
 import com.fullteaching.backend.security.AuthorizationService;
 import com.fullteaching.backend.coursedetails.CourseDetails;
-import com.fullteaching.backend.coursedetails.CourseDetailsRepository;
 import com.fullteaching.backend.user.User;
 import com.fullteaching.backend.user.UserComponent;
 
@@ -27,13 +27,13 @@ public class CommentController {
 	private static final Logger log = LoggerFactory.getLogger(CommentController.class);
 	
 	@Autowired
-	private EntryRepository entryRepository;
+	private EntryService entryService;
 	
 	@Autowired
-	private CommentRepository commentRepository;
+	private CommentService commentService;
 	
 	@Autowired
-	private CourseDetailsRepository courseDetailsRepository;
+	private CourseDetailsService courseDetailsService;
 	
 	@Autowired
 	private UserComponent user;
@@ -65,7 +65,7 @@ public class CommentController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		
-		CourseDetails cd = courseDetailsRepository.findOne(id_courseDetails);
+		CourseDetails cd = courseDetailsService.findOne(id_courseDetails);
 		
 		ResponseEntity<Object> userAuthorized = authorizationService.checkAuthorizationUsers(cd, cd.getCourse().getAttenders());
 		if (userAuthorized != null) { // If the user is not an attender of the course
@@ -81,15 +81,15 @@ public class CommentController {
 			//The comment is a root comment
 			if (comment.getCommentParent() == null) {
 				log.info("Adding new root comment");
-				Entry entry = entryRepository.findOne(id_entry);
+				Entry entry = entryService.findOne(id_entry);
 				if(entry != null) {
 					
-					comment = commentRepository.save(comment);
+					comment = commentService.save(comment);
 					
 					entry.getComments().add(comment);
 					/*Saving the modified entry: Cascade relationship between entry and comments
 					  will add the new comment to CommentRepository*/
-					entryRepository.save(entry);
+					entryService.save(entry);
 					
 					log.info("New comment succesfully added: {}", comment.toString());
 					
@@ -102,16 +102,16 @@ public class CommentController {
 			//The comment is a replay to another existing comment
 			else{
 				log.info("Adding new comment reply");
-				Comment cParent = commentRepository.findOne(comment.getCommentParent().getId());
+				Comment cParent = commentService.findById(comment.getCommentParent().getId());
 				if(cParent != null){
 					
-					comment = commentRepository.save(comment);
+					comment = commentService.save(comment);
 					
 					cParent.getReplies().add(comment);
 					/*Saving the modified parent comment: Cascade relationship between comment and 
 					 its replies will add the new comment to CommentRepository*/
-					commentRepository.save(cParent);
-					Entry entry = entryRepository.findOne(id_entry);
+					commentService.save(cParent);
+					Entry entry = entryService.findOne(id_entry);
 					
 					log.info("New comment succesfully added: {}", comment.toString());
 					

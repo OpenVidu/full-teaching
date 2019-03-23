@@ -1,5 +1,8 @@
 package com.fullteaching.backend.entry;
 
+import com.fullteaching.backend.comment.CommentService;
+import com.fullteaching.backend.coursedetails.CourseDetailsService;
+import com.fullteaching.backend.forum.ForumService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fullteaching.backend.forum.Forum;
-import com.fullteaching.backend.forum.ForumRepository;
 import com.fullteaching.backend.security.AuthorizationService;
 import com.fullteaching.backend.comment.Comment;
-import com.fullteaching.backend.comment.CommentRepository;
 import com.fullteaching.backend.coursedetails.CourseDetails;
-import com.fullteaching.backend.coursedetails.CourseDetailsRepository;
 import com.fullteaching.backend.user.User;
 import com.fullteaching.backend.user.UserComponent;
 
@@ -28,16 +28,16 @@ public class EntryController {
 	private static final Logger log = LoggerFactory.getLogger(EntryController.class);
 	
 	@Autowired
-	private ForumRepository forumRepository;
+	private ForumService forumService;
 	
 	@Autowired
-	private EntryRepository entryRepository;
+	private EntryService entryService;
 	
 	@Autowired
-	private CommentRepository commentRepository;
+	private CommentService commentService;
 	
 	@Autowired
-	private CourseDetailsRepository courseDetailsRepository;
+	private CourseDetailsService courseDetailsService;
 	
 	@Autowired
 	private UserComponent user;
@@ -63,7 +63,7 @@ public class EntryController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		
-		CourseDetails cd = courseDetailsRepository.findOne(id_i);
+		CourseDetails cd = courseDetailsService.findOne(id_i);
 		
 		ResponseEntity<Object> userAuthorized = authorizationService.checkAuthorizationUsers(cd, cd.getCourse().getAttenders());
 		if (userAuthorized != null) { // If the user is not an attender of the course
@@ -84,11 +84,11 @@ public class EntryController {
 			//Setting the date of the entry
 			entry.setDate(System.currentTimeMillis());
 			
-			comment = commentRepository.save(comment);
-			entry = entryRepository.save(entry);
+			comment = commentService.save(comment);
+			entry = entryService.save(entry);
 			
 			forum.getEntries().add(entry);
-			forumRepository.save(forum);
+			forumService.save(forum);
 			
 			log.info("New entry succesfully added: {}", entry.toString());
 			

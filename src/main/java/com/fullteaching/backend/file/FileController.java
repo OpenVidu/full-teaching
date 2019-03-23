@@ -12,6 +12,10 @@ import java.util.Iterator;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.fullteaching.backend.comment.CommentService;
+import com.fullteaching.backend.course.CourseService;
+import com.fullteaching.backend.filegroup.FileGroupService;
+import com.fullteaching.backend.user.UserService;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,14 +31,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.fullteaching.backend.comment.Comment;
-import com.fullteaching.backend.comment.CommentRepository;
 import com.fullteaching.backend.course.Course;
-import com.fullteaching.backend.course.CourseRepository;
 import com.fullteaching.backend.filegroup.FileGroup;
-import com.fullteaching.backend.filegroup.FileGroupRepository;
 import com.fullteaching.backend.security.AuthorizationService;
 import com.fullteaching.backend.user.User;
-import com.fullteaching.backend.user.UserRepository;
 import com.fullteaching.backend.user.UserComponent;
 
 @RestController
@@ -44,19 +44,19 @@ public class FileController {
 	private static final Logger log = LoggerFactory.getLogger(FileController.class);
 
 	@Autowired
-	private FileGroupRepository fileGroupRepository;
+	private FileGroupService fileGroupService;
 
 	@Autowired
-	private FileRepository fileRepository;
+	private FileService fileService;
 
 	@Autowired
-	private CourseRepository courseRepository;
+	private CourseService courseService;
 	
 	@Autowired
-	private CommentRepository commentRepository;
+	private CommentService commentService;
 
 	@Autowired
-	private UserRepository userRepository;
+	private UserService userService;
 
 	@Autowired
 	private UserComponent user;
@@ -96,7 +96,7 @@ public class FileController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 
-		Course c = courseRepository.findOne(id_course);
+		Course c = courseService.getCourseById(id_course);
 
 		ResponseEntity<Object> teacherAuthorized = authorizationService.checkAuthorization(c, c.getTeacher());
 		if (teacherAuthorized != null) { // If the user is not the teacher of the course
@@ -148,13 +148,13 @@ public class FileController {
 					customFile.setLink(uploadedFile.getPath());
 					// ONLY ON DEVELOPMENT
 				}
-				fg = fileGroupRepository.findOne(id_fileGroup);
+				fg = fileGroupService.findOne(id_fileGroup);
 				fg.getFiles().add(customFile);
 				fg.updateFileIndexOrder();
 				log.info("File succesfully uploaded to path '{}'", uploadedFile.getPath());
 			}
 
-			fileGroupRepository.save(fg);
+			fileGroupService.save(fg);
 			return new ResponseEntity<>(this.getRootFileGroup(fg), HttpStatus.CREATED);
 		}
 	}
@@ -182,7 +182,7 @@ public class FileController {
 			return;
 		}
 
-		Course c = courseRepository.findOne(id_course);
+		Course c = courseService.getCourseById(id_course);
 
 		ResponseEntity<Object> userAuthorized = authorizationService.checkAuthorizationUsers(c, c.getAttenders());
 		if (userAuthorized != null) { // If the user is not an attender of the course
@@ -190,7 +190,7 @@ public class FileController {
 			return;
 		} else {
 
-			com.fullteaching.backend.file.File f = fileRepository.findOne(id_file);
+			com.fullteaching.backend.file.File f = fileService.findOne(id_file);
 
 			if (f != null) {
 				
@@ -250,7 +250,7 @@ public class FileController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 
-		User u = userRepository.findOne(id_user);
+		User u = userService.getUserById(id_user);
 
 		ResponseEntity<Object> userAuthorized = authorizationService.checkAuthorization(u, this.user.getLoggedUser());
 		if (userAuthorized != null) { // If the user is not the teacher of the course
@@ -307,7 +307,7 @@ public class FileController {
 					// ONLY ON DEVELOPMENT
 				}
 
-				userRepository.save(u);
+				userService.save(u);
 
 				// Update current logged user picture
 				this.user.getLoggedUser().setPicture(u.getPicture());
@@ -339,8 +339,8 @@ public class FileController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 
-		Course c = courseRepository.findOne(id_course);
-		Comment comment = commentRepository.findOne(id_comment);
+		Course c = courseService.getCourseById(id_course);
+		Comment comment = commentService.findById(id_comment);
 
 		ResponseEntity<Object> userAuthorized = authorizationService.checkAuthorizationUsers(c, c.getAttenders());
 		if (userAuthorized != null) { // If the user is not an attender of the course
@@ -401,7 +401,7 @@ public class FileController {
 						log.info("File succesfully uploaded to path '{}'", uploadedFile.getPath());
 					}
 	
-					commentRepository.save(comment);
+					commentService.save(comment);
 					return new ResponseEntity<>(comment, HttpStatus.CREATED);	
 				}
 			} else {

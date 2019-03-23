@@ -11,6 +11,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import com.fullteaching.backend.course.CourseService;
+import com.fullteaching.backend.user.UserService;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,12 +27,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.fullteaching.backend.course.Course;
-import com.fullteaching.backend.course.CourseRepository;
 import com.fullteaching.backend.file.FileController;
 import com.fullteaching.backend.file.FileOperationsService;
 import com.fullteaching.backend.security.AuthorizationService;
 import com.fullteaching.backend.user.User;
-import com.fullteaching.backend.user.UserRepository;
 
 @RestController
 @RequestMapping("/api-file-reader")
@@ -52,10 +52,10 @@ public class FileReaderController {
 	private static final Logger log = LoggerFactory.getLogger(FileReaderController.class);
 
 	@Autowired
-	private CourseRepository courseRepository;
+	private CourseService courseService;
 
 	@Autowired
-	private UserRepository userRepository;
+	private UserService userService;
 
 	@Autowired
 	private AuthorizationService authorizationService;
@@ -85,7 +85,7 @@ public class FileReaderController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 
-		Course c = courseRepository.findOne(id_course);
+		Course c = courseService.getCourseById(id_course);
 
 		ResponseEntity<Object> teacherAuthorized = authorizationService.checkAuthorization(c, c.getTeacher());
 		if (teacherAuthorized != null) { // If the user is not the teacher of the course
@@ -155,7 +155,7 @@ public class FileReaderController {
 			}
 		}
 
-		Collection<User> newPossibleAttenders = userRepository.findByNameIn(attenderEmailsValid);
+		Collection<User> newPossibleAttenders = userService.getAllByNames(attenderEmailsValid);
 		Collection<User> newAddedAttenders = new HashSet<>();
 		Collection<User> alreadyAddedAttenders = new HashSet<>();
 
@@ -183,9 +183,9 @@ public class FileReaderController {
 
 		// Saving the attenders (all of them, just in case a field of the bidirectional
 		// relationship is missing in a Course or a User)
-		userRepository.save(newPossibleAttenders);
+		userService.saveAll(newPossibleAttenders);
 		// Saving the modified course
-		courseRepository.save(c);
+		courseService.save(c);
 
 		AddAttendersByFileResponse customResponse = new AddAttendersByFileResponse();
 		customResponse.attendersAdded = newAddedAttenders;
