@@ -7,13 +7,13 @@ import java.util.LinkedList;
 import java.util.Random;
 import java.util.Set;
 
+import com.fullteaching.backend.course.CourseService;
+import com.fullteaching.backend.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Controller;
 
-import com.fullteaching.backend.user.UserRepository;
 import com.fullteaching.backend.user.User;
-import com.fullteaching.backend.course.CourseRepository;
 import com.fullteaching.backend.course.Course;
 import com.fullteaching.backend.coursedetails.CourseDetails;
 import com.fullteaching.backend.comment.Comment;
@@ -27,13 +27,13 @@ import com.fullteaching.backend.session.Session;
 public class DatabaseInitializer implements CommandLineRunner {
 	
 	@Autowired
-	private UserRepository userRepository;
+	private UserService userService;
 	
 	@Autowired
-	private CourseRepository courseRepository;
+	private CourseService courseService;
 	
 	@Override
-	public void run(String... args) throws Exception {
+	public void run(String... args){
 		
 		Random rand = new Random();
 		
@@ -58,16 +58,16 @@ public class DatabaseInitializer implements CommandLineRunner {
 		listUsers.add(user3);
 		
 		//Saving users
-		userRepository.save(user1);
-		userRepository.save(user2);
-		userRepository.save(user3);
+		userService.save(user1);
+		userService.save(user2);
+		userService.save(user3);
 		
 		
 		User user4 = new User("student3@gmail.com", "pass", "New Student", defPicture, "ROLE_STUDENT");
 		setUsers.add(user4);
 		listUsers.add(user4);
 		setUsers.add(user4);
-		userRepository.save(user4);
+		userService.save(user4);
 		
 		
 		//Sample comments
@@ -236,8 +236,8 @@ public class DatabaseInitializer implements CommandLineRunner {
 		c2.getSessions().add(s5);
 		
 		//Saving courses
-		courseRepository.save(c1);
-		courseRepository.save(c2);
+		courseService.save(c1);
+		courseService.save(c2);
 	}
 
 }

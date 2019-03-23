@@ -10,7 +10,9 @@ import org.springframework.http.ResponseEntity;
 
 import com.fullteaching.backend.user.User;
 import com.fullteaching.backend.user.UserComponent;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AuthorizationService {
 	
 	private static final Logger log = LoggerFactory.getLogger(AuthorizationService.class);

@@ -23,12 +23,12 @@ public class Application
     {
     	SpringApplication.run(Application.class, args);
     }
-	
-	@Bean
-	public AuthorizationService authorizationService() {
-		return new AuthorizationService();
-	}
-    
+
+//	@Bean
+//	public AuthorizationService authorizationService() {
+//		return new AuthorizationService();
+//	}
+//
     //ONLY ON PRODUCTION
     @Value("${aws.access.key.id}")
     private String awsId;
