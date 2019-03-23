@@ -1,5 +1,6 @@
 package com.fullteaching.backend.forum;
 
+import com.fullteaching.backend.coursedetails.CourseDetailsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fullteaching.backend.coursedetails.CourseDetails;
-import com.fullteaching.backend.coursedetails.CourseDetailsRepository;
 import com.fullteaching.backend.security.AuthorizationService;
 
 @RestController
@@ -25,7 +25,7 @@ public class ForumController {
 	private AuthorizationService authorizationService;
 	
 	@Autowired
-	private CourseDetailsRepository courseDetailsRepository;
+	private CourseDetailsService courseDetailsService;
 	
 	@RequestMapping(value = "/edit/{courseDetailsId}", method = RequestMethod.PUT)
 	public ResponseEntity<Object> modifyForum(@RequestBody boolean activated, @PathVariable(value="courseDetailsId") String courseDetailsId) {
@@ -45,7 +45,7 @@ public class ForumController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 
-		CourseDetails cd = courseDetailsRepository.findOne(id_i);
+		CourseDetails cd = courseDetailsService.findOne(id_i);
 		
 		log.info("Updating forum. Previous value: {}", cd.getForum());
 		
@@ -57,11 +57,11 @@ public class ForumController {
 			//Modifying the forum
 			cd.getForum().setActivated(activated);
 			//Saving the modified course
-			courseDetailsRepository.save(cd);
+			cd = courseDetailsService.save(cd);
 			
 			log.info("Forum succesfully updated. Modified value: {}", cd.getForum());
 			
-			return new ResponseEntity<>(new Boolean(activated), HttpStatus.OK);
+			return new ResponseEntity<>(activated, HttpStatus.OK);
 		}
 	}
 

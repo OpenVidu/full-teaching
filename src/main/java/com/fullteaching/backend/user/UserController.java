@@ -23,10 +23,7 @@ import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fullteaching.backend.user.UserRepository;
-import com.fullteaching.backend.user.UserComponent;
 import com.fullteaching.backend.security.AuthorizationService;
-import com.fullteaching.backend.user.User;
 
 
 @RestController
@@ -36,7 +33,7 @@ public class UserController {
 	private static final Logger log = LoggerFactory.getLogger(UserController.class);
 	
 	@Autowired
-	private UserRepository userRepository;
+	private UserService userService;
 	
 	@Autowired
 	private UserComponent user;
@@ -59,7 +56,7 @@ public class UserController {
 		if(this.validateGoogleCaptcha(userData[3])){
 		
 			//If the email is not already in use
-			if(userRepository.findByName(userData[0]) == null) {
+			if(userService.getByName(userData[0]) == null) {
 				
 				//If the password has a valid format (at least 8 characters long and contains one uppercase, one lowercase and a number)
 				if (userData[1].matches(this.passRegex)){
@@ -68,7 +65,7 @@ public class UserController {
 					if (EmailValidator.getInstance().isValid(userData[0])){
 						log.info("Email, password and captcha are valid");
 						User newUser = new User(userData[0], userData[1], userData[2], "", "ROLE_STUDENT");
-						userRepository.save(newUser);
+						userService.save(newUser);
 						log.info("User successfully signed up");
 						
 						return new ResponseEntity<>(newUser, HttpStatus.CREATED);
@@ -113,9 +110,9 @@ public class UserController {
 			
 			//If the password has a valid format (at least 8 characters long and contains one uppercase, one lowercase and a number)
 			if (userData[1].matches(this.passRegex)){
-				User modifiedUser = userRepository.findByName(user.getLoggedUser().getName());
+				User modifiedUser = userService.getByName(user.getLoggedUser().getName());
 				modifiedUser.setPasswordHash(encoder.encode(userData[1]));
-				userRepository.save(modifiedUser);
+				userService.save(modifiedUser);
 				
 				log.info("Password successfully updated");
 				

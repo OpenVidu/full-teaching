@@ -10,7 +10,9 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.json.JsonException;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.mock.web.MockMultipartFile;
@@ -122,7 +124,7 @@ public class FileTestUtils {
 		
 	}
 	
-	public static List<FileGroup> json2fileGroupList(String json) throws JsonParseException, JsonMappingException, IOException{
+	public static List<FileGroup> json2fileGroupList(String json) throws IOException, JSONException {
 		json = json.replaceAll("\"" + "fileExtension" + "\"[ ]*:[^,}\\]]*[,]?", "");
 		json = json.replaceAll(",}","}");
 		

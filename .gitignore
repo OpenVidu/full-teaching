@@ -9,4 +9,5 @@
 .classpath
 /.idea/
 *.iml
+*.vcode
 src/main/angular/package-lock.json

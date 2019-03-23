@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fullteaching.backend.user.UserService;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fullteaching.backend.user.UserComponent;
-import com.fullteaching.backend.user.UserRepository;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fullteaching.backend.course.Course.SimpleCourseList;
 import com.fullteaching.backend.security.AuthorizationService;
@@ -31,10 +31,10 @@ public class CourseController {
 	private static final Logger log = LoggerFactory.getLogger(CourseController.class);
 
 	@Autowired
-	private CourseRepository courseRepository;
+	private CourseService courseService;
 	
 	@Autowired
-	private UserRepository userRepository;
+	private UserService userService;
 	
 	@Autowired
 	private UserComponent user;
@@ -69,12 +69,13 @@ public class CourseController {
 		}
 		Set<Long> s = new HashSet<>();
 		s.add(id_i);
-		Collection<User> users = userRepository.findAll(s);
-		Collection<Course> courses = new HashSet<>();
-		courses = courseRepository.findByAttenders(users);
+		Collection<User> users = userService.findAll(s);
+		Collection<Course> courses = courseService.findByAttenders(users);
 		return new ResponseEntity<>(courses, HttpStatus.OK);
 	}
-	
+
+
+
 	@RequestMapping(value = "/course/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Object> getCourse(@PathVariable(value="id") String id) {
 		
@@ -92,7 +93,7 @@ public class CourseController {
 			log.error("Course ID '{}' is not of type Long", id);
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		Course course = courseRepository.findOne(id_i);
+		Course course = courseService.getCourseById(id_i);
 		return new ResponseEntity<>(course ,HttpStatus.OK);
 	}
 	
@@ -115,10 +116,9 @@ public class CourseController {
 		/*Saving the new course: Course entity is the owner of the relationships
 		Course-Teacher, Course-User, Course-CourseDetails. Teacher, User and CourseDetails
 		tables don't need to be updated (they will automatically be)*/
-		courseRepository.save(course);
-		courseRepository.flush();
-		
-		course = courseRepository.findOne(course.getId());
+		courseService.save(course);
+
+		course = courseService.getCourseById(course.getId());
 		
 		log.info("New course succesfully added: {}", course.toString());
 		
@@ -135,7 +135,7 @@ public class CourseController {
 			return authorized;
 		};
 
-		Course c = courseRepository.findOne(course.getId());
+		Course c = courseService.getCourseById(course.getId());
 		
 		ResponseEntity<Object> teacherAuthorized = authorizationService.checkAuthorization(c, c.getTeacher());
 		if (teacherAuthorized != null) { // If the user is not the teacher of the course
@@ -152,7 +152,7 @@ public class CourseController {
 				}
 			}
 			//Saving the modified course
-			courseRepository.save(c);
+			courseService.save(c);
 			
 			log.info("Course succesfully updated. Modified value: {}", c.toString());
 			
@@ -178,7 +178,7 @@ public class CourseController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		
-		Course c = courseRepository.findOne(id_course);
+		Course c = courseService.getCourseById(id_course);
 		
 		ResponseEntity<Object> teacherAuthorized = authorizationService.checkAuthorization(c, c.getTeacher());
 		if (teacherAuthorized != null) { // If the user is not the teacher of the course
@@ -190,14 +190,16 @@ public class CourseController {
 			//Removing the deleted course from its attenders
 			Collection<Course> courses = new HashSet<>();
 			courses.add(c);
-			Collection<User> users = userRepository.findByCourses(courses);
+			Collection<User> users = userService.findByCourses(courses);
 			for(User u: users){
 				u.getCourses().remove(c);
 			}
-			userRepository.save(users);
+
+
+			userService.saveAll(users);
 			c.getAttenders().clear();
 			
-			courseRepository.delete(c);
+			courseService.delete(c);
 			
 			log.info("Course successfully deleted");
 			
@@ -228,7 +230,7 @@ public class CourseController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 
-		Course c = courseRepository.findOne(id_course);
+		Course c = courseService.getCourseById(id_course);
 		
 		ResponseEntity<Object> teacherAuthorized = authorizationService.checkAuthorization(c, c.getTeacher());
 		if (teacherAuthorized != null) { // If the user is not the teacher of the course
@@ -254,7 +256,7 @@ public class CourseController {
 				}
 			}
 			
-			Collection<User> newPossibleAttenders = userRepository.findByNameIn(attenderEmailsValid);
+			Collection<User> newPossibleAttenders = userService.getAllByNames(attenderEmailsValid);
 			Collection<User> newAddedAttenders = new HashSet<>();
 			Collection<User> alreadyAddedAttenders = new HashSet<>();
 			
@@ -272,9 +274,9 @@ public class CourseController {
 			}
 			
 			//Saving the attenders (all of them, just in case a field of the bidirectional relationship is missing in a Course or a User)
-			userRepository.save(newPossibleAttenders);	
+			userService.saveAll(newPossibleAttenders);
 			//Saving the modified course
-			courseRepository.save(c);
+			courseService.save(c);
 			
 			AddAttendersResponse customResponse = new AddAttendersResponse();
 			customResponse.attendersAdded = newAddedAttenders;
@@ -304,7 +306,7 @@ public class CourseController {
 			return authorized;
 		};
 
-		Course c = courseRepository.findOne(course.getId());
+		Course c = courseService.getCourseById(course.getId());
 		
 		ResponseEntity<Object> teacherAuthorized = authorizationService.checkAuthorization(c, c.getTeacher());
 		if (teacherAuthorized != null) { // If the user is not the teacher of the course
@@ -315,7 +317,7 @@ public class CourseController {
 		
 			Set<Course> setCourse = new HashSet<>();
 			setCourse.add(c);
-			Collection<User> courseAttenders = userRepository.findByCourses(setCourse);
+			Collection<User> courseAttenders = userService.findByCourses(setCourse);
 			
 			for (User attender : courseAttenders){
 				if (!course.getAttenders().contains(attender)){
@@ -324,12 +326,12 @@ public class CourseController {
 				}
 			}
 			
-			userRepository.save(courseAttenders);
+			userService.saveAll(courseAttenders);
 			
 			//Modifying the course attenders
 			c.setAttenders(course.getAttenders());
 			//Saving the modified course
-			courseRepository.save(c);
+			courseService.save(c);
 			return new ResponseEntity<>(c.getAttenders(), HttpStatus.OK);
 		}
 	}

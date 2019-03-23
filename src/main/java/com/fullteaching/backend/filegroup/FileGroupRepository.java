@@ -1,7 +1,13 @@
 package com.fullteaching.backend.filegroup;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface FileGroupRepository extends JpaRepository<FileGroup, Long> {
+@Repository
+public interface FileGroupRepository extends CrudRepository<FileGroup, Long> {
+
+
+    FileGroup findById(long id);
 
 }

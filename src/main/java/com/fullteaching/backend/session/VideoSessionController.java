@@ -91,7 +91,7 @@ public class VideoSessionController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 
-		Session session = sessionRepository.findOne(id_i);
+		Session session = sessionRepository.findById(id_i);
 		if (session != null) { // sessionId belongs to a real Session
 			String sessionId;
 			String token;

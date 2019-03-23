@@ -1,7 +1,14 @@
 package com.fullteaching.backend.forum;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ForumRepository extends JpaRepository<Forum, Long> {
+@Repository
+public interface ForumRepository extends CrudRepository<Forum, Long> {
+
+
+    Forum findById(long id);
+
+
 
 }
