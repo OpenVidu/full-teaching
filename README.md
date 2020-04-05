@@ -1,5 +1,7 @@
 # FullTeaching
 
+**NOTE: This project is not maintained. We are working in a big refactoring as part of an student project here: https://github.com/codeurjc-students/2019-FullTeaching/tree/Angular-Refactor**
+
 [![Build Status](https://travis-ci.org/pabloFuente/full-teaching.png?branch=master)](https://travis-ci.org/pabloFuente/full-teaching)
 
 <p align="center"><img src="https://github.com/OpenVidu/full-teaching/blob/master/ReadmeImages/presentation.png?raw=true"/></p>
